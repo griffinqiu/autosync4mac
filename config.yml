@@ -1,0 +1,5 @@
+host: hostname
+username: user
+password: pwd
+sco_src: /Users/griffin/folder
+sco_dest: /home/yqiu
