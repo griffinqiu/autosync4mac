@@ -11,15 +11,15 @@ if File.exist? LOCK_FILE
   exit
 end
 
-YAML::ENGINE.yamler = 'syck'
+# YAML::ENGINE.yamler = 'syck'
 
 CONFIG = YAML::load(File.open("#{File.dirname(__FILE__)}/config.yml"))
 
 $host = CONFIG['host']
 $username = CONFIG['username']
 $password = CONFIG['password']
-$sco_src_dir = CONFIG['sco_src']
-$sco_dest_dir = CONFIG['sco_dest']
+$src_dir = CONFIG['src_dir']
+$dest_dir = CONFIG['dest_dir']
 
 
 $scp = Net::SCP.start($host, $username, :password => $password)
@@ -70,10 +70,10 @@ Kernel.at_exit do
 end
 
 p "start listen for changes..."
-Listen.to($sco_src_dir) do |modified, added, removed|
+Listen.to($src_dir) do |modified, added, removed|
   modified.concat(added).each do |candidate|
     unless /\.(git|svn|hg)/ =~ candidate
-      upload candidate, $sco_dest_dir + candidate.split($sco_src_dir)[1], File.directory?(candidate)
+      upload candidate, $dest_dir + candidate.split($src_dir)[1], File.directory?(candidate)
     end
   end
 end

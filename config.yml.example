@@ -1,0 +1,5 @@
+host: <hostname>
+username: <username>
+password: <pwd>
+src_dir: <local-folder-path>
+dest_dir: <remote-folder-path>
