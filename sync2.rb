@@ -11,7 +11,7 @@ if File.exist? LOCK_FILE
   exit
 end
 
-# YAML::ENGINE.yamler = 'syck'
+YAML::ENGINE.yamler = 'syck'
 
 CONFIG = YAML::load(File.open("#{File.dirname(__FILE__)}/config.yml"))
 
